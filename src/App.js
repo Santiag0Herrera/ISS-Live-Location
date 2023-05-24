@@ -1,74 +1,36 @@
 import './App.css';
-import React, {useState, useEffect, useRef} from 'react';
-import Globe from 'react-globe.gl';
-import Stars from './assets/galaxy_starfield.png'
-import * as THREE from 'three'
+import React, { useEffect, useState } from 'react';
+import Earth from './components/Globe/Globe';
+import Display from './components/Display/Display';
 import { getISSLocation } from './services/getISSLocation';
 
 function App() {
-  const [ISSdata, setISSdata] = useState({})
-  // const globeNightImg = "https://unpkg.com/three-globe@2.27.2/example/img/earth-night.jpg"
-  // const globeDayImg = "https://unpkg.com/three-globe@2.27.2/example/img/earth-day.jpg"
-  // const handleChangeGlobeTheme = () => {
-  //   setGlobeThemeDay(!globeThemeDay)
-  // }
+  const [ISSdata, setISSdata] = useState({});
+  const [prevLat, setPrevLat] = useState(0);
+  const [prevLng, setPrevLng] = useState(0);
 
-    const globeEl = useRef();
-    const ringsEl = useRef(null);
-
-    async function getISSdata (){
-        const data = await getISSLocation()
-        setISSdata(data)
-        console.log(data)
+  useEffect(() => {
+    // Función asincrónica para obtener la ubicación de ISS
+    async function fetchISSData() {
+      const data = await getISSLocation();
+      console.log(ISSdata)
+      console.log(data)
+      setISSdata(data); // Guardar la ubicación actual de ISS en el estado
     }
 
-    useEffect(() => {
-      const globe = globeEl.current;
-      // Auto-rotate
-      globe.controls().autoRotate = true;
-      globe.controls().autoRotateSpeed = -0.10
-      if (ringsEl.current) {
-        globe.scene().add(ringsEl.current);
-        const ringsMaterial = ringsEl.current.material;
-        if (ringsMaterial) {
-          ringsMaterial.renderOrder = 1; // Valor mayor que el de los materiales del globo
-        }
-      }
+    fetchISSData(); // Obtener la ubicación de ISS al cargar la aplicación
 
-      getISSdata()
+    setInterval(fetchISSData, 1000); // Actualizar la ubicación de ISS cada 3 segundos
+  }, []);
 
-      //get ISS location
-      setInterval(getISSdata, 10000)
-
-    }, [])
-
-
-    const gData = [{
-      lat: ISSdata.lat,
-      lng: ISSdata.lng,
-      maxR: 2,
-      propagationSpeed: 0.5,
-      repeatPeriod: 1500
-    }]
-  
   return (
-    <div className="App">
-     {/* <h1>ISS Live Geolocation</h1> */}
-     {/* <button onClick={handleChangeGlobeTheme}>Change Globe Theme</button> */}
-     <Globe
-        ref={globeEl}
-        ringsEl={ringsEl}
-        ringAltitude={0.1}
-        animateIn={false}
-        ringsData={gData}
-        ringColor={() => '#ff1133'}
-        ringMaxRadius="maxR"
-        ringPropagationSpeed="propagationSpeed"
-        ringRepeatPeriod="repeatPeriod"
-        bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-        globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg" // URL de la imagen del globo
-        backgroundImageUrl={Stars}
-      />
+    <div className="app-container">
+      <div className="display-container">
+        <Display ISSdata={ISSdata} ISSInitialData={{ initLat: prevLat, initLng: prevLng }} />
+      </div>
+      <div className="earth-container">
+        <Earth ISSdata={ISSdata} />
+      </div>
     </div>
   );
 }

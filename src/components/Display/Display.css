@@ -1,0 +1,14 @@
+.container{
+    padding: 30px;
+}
+
+.container h1{
+    font-family: 'Kanit', sans-serif;
+}
+
+.container p{
+    list-style: none;
+    font-size: small;
+    font-weight: 1000;
+    font-family: 'Roboto Mono', monospace;
+}

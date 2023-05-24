@@ -1,38 +1,26 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Roboto+Mono:wght@200&display=swap');
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* title font -> font-family: 'Kanit', sans-serif;
+subtitle font -> font-family: 'Roboto Mono', monospace; */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.display-container {
+  position: absolute !important;
+  height: 100%;
+  top: 0p;
+  z-index: 2;
+  color: rgb(255, 255, 255);
+  backdrop-filter: blur(1.5px);
+  background: linear-gradient(to right, rgb(0, 0, 0), transparent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.earth-container {
+  position: relative;
+  top: 0;
+  z-index: 1;
 }
