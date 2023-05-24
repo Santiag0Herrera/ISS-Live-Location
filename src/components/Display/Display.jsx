@@ -40,11 +40,14 @@ const Display = (props) => {
     
 
     return (
-        <div className="container">
-            <h1>International Space<br/> Station</h1>
-            <p>Latitude: {ISSdata.lat}</p>
-            <p>Longitude: {ISSdata.lng}</p>
-            <p>Speed: 7.667 km/s (aprox)</p>
+        <div className="display-container-inner">
+            <div className="container">
+                <h1>International Space<br/> Station</h1>
+                <p>Latitude: {ISSdata.lat}</p>
+                <p>Longitude: {ISSdata.lng}</p>
+                <p>Speed: 7.667 km/s (aprox)</p>
+            </div>
+            <p>Project by Santiago Herrera</p>
         </div>
     )
 }
