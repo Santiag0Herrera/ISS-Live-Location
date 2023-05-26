@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Display.css'
 
 const Display = (props) => {
-    const { ISSdata, ISSInitialData } = props;
+    const { ISSdata } = props;
     // const [speed, setSpeed] = useState(0);
 
     // const calcularVelocidad = (lat1, lon1, lat2, lon2, tiempoEnSegundos) => {
@@ -33,11 +33,9 @@ const Display = (props) => {
 
     // useEffect(() => {
     //     // Cálculo de la distancia en un segundo
-    //     const speedCalc = calcularDistancia(ISSdata.lat, ISSdata.lng, ISSInitialData.initLat, ISSInitialData.initLng);
+    //     const speedCalc = calcularVelocidad(ISSdata.lat, ISSdata.lng, ISSInitialData.initLat, ISSInitialData.initLng, 1.5);
     //     setSpeed(speedCalc)
     // }, [ISSdata.lat, ISSdata.lng, ISSInitialData.initLat, ISSInitialData.initLng]);
-    
-    
 
     return (
         <div className="display-container-inner">
@@ -45,7 +43,7 @@ const Display = (props) => {
                 <h1>International Space<br/> Station</h1>
                 <p>Latitude: {ISSdata.lat}</p>
                 <p>Longitude: {ISSdata.lng}</p>
-                <p>Speed: 7.667 km/s (aprox)</p>
+                <p>Speed: 7,667 km/s</p>
             </div>
             <p>Project by Santiago Herrera</p>
         </div>

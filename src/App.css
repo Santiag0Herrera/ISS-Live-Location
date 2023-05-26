@@ -16,7 +16,7 @@ subtitle font -> font-family: 'Roboto Mono', monospace; */
   z-index: 2;
   color: rgb(255, 255, 255);
   backdrop-filter: blur(1.5px);
-  background: linear-gradient(to right, rgb(0, 0, 0), transparent);
+  background: linear-gradient(to right, rgb(51, 51, 51), transparent);
 }
 
 .earth-container {

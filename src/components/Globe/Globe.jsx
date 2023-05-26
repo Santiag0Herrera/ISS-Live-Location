@@ -7,20 +7,28 @@ const Earth = () => {
 
     const [ISSdata, setISSdata] = useState({})
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [pointsArray, setPointsArray] = useState([])
+    const pointsData = []
+    let counter = 0
 
     const globeEl = useRef();
     const ringsEl = useRef(null);
+    const pointEl = useRef(null)
 
     async function getISSdata (){
+        counter++
         const data = await getISSLocation()
         setISSdata(data)
+        console.log(counter);
+        if (counter > 3){ 
+            pointsData.push({ lat:data.lat, lng: data.lng, pointAltitude: 0.02 })
+            setPointsArray(pointsData)
+            counter = 0
+        }
     }
 
     useEffect(() => {
         const globe = globeEl.current;
-        // Auto-rotate
-        globe.controls().autoRotate = true;
-        globe.controls().autoRotateSpeed = -0.10
         if (ringsEl.current) {
             globe.scene().add(ringsEl.current);
             const ringsMaterial = ringsEl.current.material;
@@ -28,6 +36,14 @@ const Earth = () => {
                 ringsMaterial.renderOrder = 1; // Valor mayor que el de los materiales del globo
             }
         }
+
+        if (pointEl.current) {
+            globe.scene().add(pointEl.current);
+            const pointsGeometry = pointEl.current.geometry;
+            if (pointsGeometry) {
+              pointsGeometry.renderOrder = 2; // Valor mayor que el de los materiales del globo
+            }
+          }
 
         getISSdata()
 
@@ -38,7 +54,6 @@ const Earth = () => {
 
     useEffect(()=>{
         setWindowWidth(window.screen.width)
-        console.log(window.screen.width)
     }, [window.screen.width])
 
 
@@ -47,25 +62,30 @@ const Earth = () => {
         lng: ISSdata.lng,
         maxR: 2,
         propagationSpeed: 0.5,
-        repeatPeriod: 1500
+        repeatPeriod: 1500,
     }]
     
     return (
         <Globe
             width={windowWidth}
             ref={globeEl}
-            ringsEl={ringsEl}
-            ringAltitude={0.1}
             animateIn={false}
+            bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg" // URL de la imagen del globo
+            backgroundImageUrl={Stars}
+            
+            pointsData={pointsArray}
+            pointColor={() => 'white'}
+            pointAltitude={"pointAltitude"}
+            
+            ringAltitude={0.1}
             ringsData={gData}
             ringColor={() => '#ff1133'}
             ringMaxRadius="maxR"
             ringPropagationSpeed="propagationSpeed"
             ringRepeatPeriod="repeatPeriod"
-            bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg" // URL de la imagen del globo
-            backgroundImageUrl={Stars}
         />
+            
     );  
 }
 
