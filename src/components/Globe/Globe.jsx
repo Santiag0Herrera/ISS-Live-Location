@@ -6,8 +6,8 @@ import { getISSLocation } from '../../services/getISSLocation';
 const Earth = () => {
 
     const [ISSdata, setISSdata] = useState({})
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [pointsArray, setPointsArray] = useState([])
+    //
     const pointsData = []
     let counter = 0
 
@@ -19,7 +19,6 @@ const Earth = () => {
         counter++
         const data = await getISSLocation()
         setISSdata(data)
-        console.log(counter);
         if (counter > 3){ 
             pointsData.push({ lat:data.lat, lng: data.lng, pointAltitude: 0.02 })
             setPointsArray(pointsData)
@@ -29,6 +28,10 @@ const Earth = () => {
 
     useEffect(() => {
         const globe = globeEl.current;
+        globe.controls().autoRotate = true;
+        globe.controls().autoRotateSpeed = 0.20
+        console.log(globe.controls().position0);
+        console.log(globe.controls().position0);
         if (ringsEl.current) {
             globe.scene().add(ringsEl.current);
             const ringsMaterial = ringsEl.current.material;
@@ -45,16 +48,11 @@ const Earth = () => {
             }
           }
 
-        getISSdata()
-
         //get ISS location
+        getISSdata()
         setInterval(getISSdata, 3000)
 
     }, [])
-
-    useEffect(()=>{
-        setWindowWidth(window.screen.width)
-    }, [window.screen.width])
 
 
     const gData = [{
@@ -67,9 +65,8 @@ const Earth = () => {
     
     return (
         <Globe
-            width={windowWidth}
             ref={globeEl}
-            animateIn={false}
+            animateIn={true}
             bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg" // URL de la imagen del globo
             backgroundImageUrl={Stars}
