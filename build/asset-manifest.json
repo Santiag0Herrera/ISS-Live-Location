@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ISS-Live-Location/build/static/css/main.0ab4e257.css",
-    "main.js": "/ISS-Live-Location/build/static/js/main.ad8ae20b.js",
+    "main.js": "/ISS-Live-Location/build/static/js/main.45c65951.js",
     "static/js/787.5e2e5b5e.chunk.js": "/ISS-Live-Location/build/static/js/787.5e2e5b5e.chunk.js",
     "static/media/galaxy_starfield.png": "/ISS-Live-Location/build/static/media/galaxy_starfield.6376a942e1ef27fea433.png",
     "index.html": "/ISS-Live-Location/build/index.html",
     "main.0ab4e257.css.map": "/ISS-Live-Location/build/static/css/main.0ab4e257.css.map",
-    "main.ad8ae20b.js.map": "/ISS-Live-Location/build/static/js/main.ad8ae20b.js.map",
+    "main.45c65951.js.map": "/ISS-Live-Location/build/static/js/main.45c65951.js.map",
     "787.5e2e5b5e.chunk.js.map": "/ISS-Live-Location/build/static/js/787.5e2e5b5e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0ab4e257.css",
-    "static/js/main.ad8ae20b.js"
+    "static/js/main.45c65951.js"
   ]
 }
