@@ -50,7 +50,7 @@ const Earth = () => {
 
         //get ISS location
         getISSdata()
-        setInterval(getISSdata, 3000)
+        setInterval(getISSdata, 60000)
 
     }, [])
 
